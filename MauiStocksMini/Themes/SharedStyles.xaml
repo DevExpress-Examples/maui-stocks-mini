@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:local="clr-namespace:DevExpress.Maui.Demo.Stocks"
+    x:Class="DevExpress.Maui.Demo.Stocks.SharedStyles">
+
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="{DynamicResource MarketPage_FontSize}"/>
+    </Style>
+
+    <Style TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="RowSpacing" Value="0"/>
+        <Setter Property="ColumnSpacing" Value="0"/>
+    </Style>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarBackgroundColor}" />
+        <Setter Property="BarTextColor" Value="{DynamicResource NavigationBarTextColor}"/>
+        <Setter Property="ios:NavigationPage.HideNavigationBarSeparator" Value="true"/>
+    </Style>
+</ResourceDictionary>
