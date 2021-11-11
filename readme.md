@@ -246,22 +246,9 @@ Let's create a grid layout in the item template.
             BackgroundColor="Transparent"
             RowSpacing="0"
             ColumnSpacing="0"
-            Padding="8,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinitionCollection>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </ColumnDefinitionCollection>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinitionCollection>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="1"/>
-                </RowDefinitionCollection>
-            </Grid.RowDefinitions>
+            Padding="8,0"
+            ColumnDefinitions="*, *"
+            RowDefinitions="Auto, Auto, 1">
         </Grid>
     </DataTemplate>
 </dxcv:DXCollectionView.ItemTemplate>
@@ -272,7 +259,6 @@ We also need to populate the grid layout with labels and images.
 ```xaml
 <Label
     Text="{Binding Ticker}"
-    Grid.Column="1"
     Margin="12,12,0,0"
     VerticalOptions="End"
     TextColor="{DynamicResource PrimaryTextColor}"
@@ -280,60 +266,56 @@ We also need to populate the grid layout with labels and images.
 <Label
     Text="{Binding CompanyName}"
     Grid.Row="1"
-    Grid.Column="1"
     Margin="12,4,0,12"
     VerticalOptions="Start"
     FontSize="Caption"
     TextColor="{DynamicResource SecondaryTextColor}"/>
 <Label
     Text="{Binding ClosePrice}"
-    Grid.Column="2"
-    Grid.ColumnSpan="2"
+    Grid.Column="1"
     VerticalOptions="End"
     Margin="0,12,12,0"
     HorizontalOptions="End"
     FontSize="Medium"
     TextColor="{DynamicResource PrimaryTextColor}"/>
-<StackLayout
+]<StackLayout
     Orientation="Horizontal"
-    Grid.Column="2"
+    Grid.Column="1"
     Grid.Row="1"
     VerticalOptions="Start"
+    HorizontalOptions="EndAndExpand"
     Margin="0,4,12,12">
     <Image
         Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
-            PositiveValue='quote_arrow_up.svg',
-            NegativeValue='quote_arrow_down.svg',
-            ZeroValue='not_changed.svg'}}"
+        PositiveValue='quote_arrow_up',
+        NegativeValue='quote_arrow_down',
+        ZeroValue='not_changed'}}"
         WidthRequest="18"
         HeightRequest="18"
-        HorizontalOptions="End"
         VerticalOptions="Start"
         Margin="0,0,3,0"/>
     <Label
-        Text="{Binding Change, StringFormat='{0:n2}'}"
+        Text="{Binding Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
         TextColor="{Binding Change, Converter={local:DoubleToColorConverter
-            PositiveValue='RisingValueColor',
-            NegativeValue='FallingValueColor',
-            ZeroValue='TextColor'}}"
-        HorizontalOptions="End"
+        PositiveValue='RisingValueColor',
+        NegativeValue='FallingValueColor',
+        ZeroValue='TextColor'}}"
         VerticalOptions="Start"
         FontSize="Caption"
         Margin="3,0"/>
     <Label
-        Text="{Binding ChangePercent, StringFormat='{0:p2}'}"
+        Text="{Binding ChangePercent, StringFormat='{0:(+0.00%);(-0.00%);(0.00%)}'}"
         TextColor="{Binding Change, Converter={local:DoubleToColorConverter
-            PositiveValue='RisingValueColor', 
-            NegativeValue='FallingValueColor', 
-            ZeroValue='TextColor'}}"
-        HorizontalOptions="End"
+        PositiveValue='RisingValueColor', 
+        NegativeValue='FallingValueColor', 
+        ZeroValue='TextColor'}}"
         VerticalOptions="Start"
         Margin="3,0,0,0"
         FontSize="Caption"/>
 </StackLayout>
 <BoxView
     Grid.Row="2"
-    Grid.ColumnSpan="4"
+    Grid.ColumnSpan="2"
     Color="{DynamicResource SeparatorColor}"
     Margin="12,0"/>
 ```
@@ -526,9 +508,9 @@ The first grid row contains company name and the last price. We use labels and i
             Margin="0,0,3,0"
             Source="{Binding Item.Change, 
             Converter={local:DoubleToImageSourceConverter
-                PositiveValue='quote_arrow_up.svg', 
-                NegativeValue='quote_arrow_down.svg',
-                ZeroValue='not_changed.svg'}}"
+                PositiveValue='quote_arrow_up', 
+                NegativeValue='quote_arrow_down',
+                ZeroValue='not_changed'}}"
             VerticalOptions="End">
             <Image.WidthRequest>
                 <OnPlatform x:TypeArguments="x:Double">
@@ -757,10 +739,9 @@ In the *MainPage.xaml* file and the code-behind, handle the [DXCollectionView.Ta
 
 ```cs
 private async void DXCollectionView_Tap(object sender, CollectionView.CollectionViewGestureEventArgs e) {
-    var item = (CollectionItemViewModel)e.Item;
-    var historicalDataViewModel = new HistoricalDataViewModel(item);
-    var navigationPage = (NavigationPage)Application.Current.MainPage;
-    await navigationPage.PushAsync(new HistoricalDataPage(historicalDataViewModel), false);
+    var symbolViewModel = (CollectionItemViewModel)e.Item;
+    var historicalDataViewModel = new HistoricalDataViewModel(symbolViewModel);
+    Navigation.PushAsync(new HistoricalDataPage(historicalDataViewModel));
 }
 ```
 
