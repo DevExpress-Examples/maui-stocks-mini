@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
@@ -10,6 +10,7 @@
     mc:Ignorable="d"
     x:Class="DevExpress.Maui.Demo.Stocks.MainPage"
     x:Name="BrowseItemsPage"
+    Title="Market"
     BackgroundColor="{DynamicResource BackgroundColor}"
     ios:Page.UseSafeArea="True">
     <ContentPage.BindingContext>
@@ -33,25 +34,11 @@
                         BackgroundColor="Transparent"
                         RowSpacing="0"
                         ColumnSpacing="0"
-                        Padding="8,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinitionCollection>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </ColumnDefinitionCollection>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinitionCollection>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="1"/>
-                            </RowDefinitionCollection>
-                        </Grid.RowDefinitions>
+                        Padding="8,0"
+                        ColumnDefinitions="*, *"
+                        RowDefinitions="Auto, Auto, 1">
                         <Label
                             Text="{Binding Ticker}"
-                            Grid.Column="1"
                             Margin="12,12,0,0"
                             VerticalOptions="End"
                             TextColor="{DynamicResource PrimaryTextColor}"
@@ -59,15 +46,13 @@
                         <Label
                             Text="{Binding CompanyName}"
                             Grid.Row="1"
-                            Grid.Column="1"
                             Margin="12,4,0,12"
                             VerticalOptions="Start"
                             FontSize="Caption"
                             TextColor="{DynamicResource SecondaryTextColor}"/>
                         <Label
                             Text="{Binding ClosePrice}"
-                            Grid.Column="2"
-                            Grid.ColumnSpan="2"
+                            Grid.Column="1"
                             VerticalOptions="End"
                             Margin="0,12,12,0"
                             HorizontalOptions="End"
@@ -75,44 +60,42 @@
                             TextColor="{DynamicResource PrimaryTextColor}"/>
                         <StackLayout
                             Orientation="Horizontal"
-                            Grid.Column="2"
+                            Grid.Column="1"
                             Grid.Row="1"
                             VerticalOptions="Start"
+                            HorizontalOptions="EndAndExpand"
                             Margin="0,4,12,12">
-                        <Image
-                            Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
-                                PositiveValue='quote_arrow_up.svg',
-                                NegativeValue='quote_arrow_down.svg',
-                                ZeroValue='not_changed.svg'}}"
-                            WidthRequest="18"
-                            HeightRequest="18"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            Margin="0,0,3,0"/>
-                        <Label
-                            Text="{Binding Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
-                            TextColor="{Binding Change, Converter={local:DoubleToColorConverter
+                            <Image
+                                Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
+                                PositiveValue='quote_arrow_up.png',
+                                NegativeValue='quote_arrow_down.png',
+                                ZeroValue='not_changed.png'}}"
+                                WidthRequest="18"
+                                HeightRequest="18"
+                                VerticalOptions="Start"
+                                Margin="0,0,3,0"/>
+                            <Label
+                                Text="{Binding Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
+                                TextColor="{Binding Change, Converter={local:DoubleToColorConverter
                                 PositiveValue='RisingValueColor',
                                 NegativeValue='FallingValueColor',
                                 ZeroValue='TextColor'}}"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            FontSize="Caption"
-                            Margin="3,0"/>
-                        <Label
-                            Text="{Binding ChangePercent, StringFormat='{0:(+0.00%);(-0.00%);(0.00%)}'}"
-                            TextColor="{Binding Change, Converter={local:DoubleToColorConverter
+                                VerticalOptions="Start"
+                                FontSize="Caption"
+                                Margin="3,0"/>
+                            <Label
+                                Text="{Binding ChangePercent, StringFormat='{0:(+0.00%);(-0.00%);(0.00%)}'}"
+                                TextColor="{Binding Change, Converter={local:DoubleToColorConverter
                                 PositiveValue='RisingValueColor', 
                                 NegativeValue='FallingValueColor', 
                                 ZeroValue='TextColor'}}"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            Margin="3,0,0,0"
-                            FontSize="Caption"/>
+                                VerticalOptions="Start"
+                                Margin="3,0,0,0"
+                                FontSize="Caption"/>
                         </StackLayout>
                         <BoxView
                             Grid.Row="2"
-                            Grid.ColumnSpan="4"
+                            Grid.ColumnSpan="2"
                             Color="{DynamicResource SeparatorColor}"
                             Margin="12,0"/>
                     </Grid>

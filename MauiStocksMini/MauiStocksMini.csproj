@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<!-- iOS, Android, MacCatalyst -->
@@ -15,8 +15,7 @@
 		<ApplicationId>com.companyname.MauiStocksMini</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationVersion>1.0</ApplicationVersion>
-		<AndroidVersionCode>1</AndroidVersionCode>
+		<ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,11 +33,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\financial_chart.svg" />
-	  <None Remove="Resources\Images\not_changed.svg" />
-	  <None Remove="Resources\Images\quote_arrow_down.svg" />
-	  <None Remove="Resources\Images\quote_arrow_up.svg" />
-	  <None Remove="Resources\symbols.json" />
+		<None Remove="Resources\Images\financial_chart.svg" />
+		<None Remove="Resources\Images\not_changed.svg" />
+		<None Remove="Resources\Images\quote_arrow_down.svg" />
+		<None Remove="Resources\Images\quote_arrow_up.svg" />
+		<None Remove="Resources\symbols.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -48,28 +47,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DevExpress.Maui.Charts" Version="21.2.1-pre-*" />
-	  <PackageReference Include="DevExpress.Maui.CollectionView" Version="21.2.1-pre-*" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.1-pre-*" />
+		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.1.1-pre-*" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\MainPage.xaml.cs">
-	    <DependentUpon>MainPage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Views\MainPage.xaml.cs">
+			<DependentUpon>MainPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Themes\DarkTheme.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Themes\DarkTheme.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 
 	<PropertyGroup>
-		<InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">true</InvariantGlobalization>
 		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
-		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-maccatalyst'))">maccatalyst-x64</RuntimeIdentifier>
 		<UseInterpreter Condition="$(TargetFramework.Contains('-android'))">False</UseInterpreter>
 	</PropertyGroup>
 
