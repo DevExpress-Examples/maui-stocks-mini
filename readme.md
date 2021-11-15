@@ -17,7 +17,7 @@ The UI components used in this sample application (alongside other DevExpress .N
 
 ## Prerequisites
 
-1. Install Visual Studio 2022 and the latest version of .NET MAUI. Review the following Microsoft help topic for more information: : [Installation](https://docs.microsoft.com/en-gb/dotnet/maui/get-started/installation).
+1. Install Visual Studio 2022 and the latest version of .NET MAUI. Review the following Microsoft help topic for more information: [Installation](https://docs.microsoft.com/en-gb/dotnet/maui/get-started/installation).
 1. Register the following NuGet feed within Visual Studio:
     ```
     https://nuget.devexpress.com/free/api
@@ -40,7 +40,7 @@ The following step-by-step tutorial details how to reproduce this application.
     * **DevExpress.Maui.CollectionView**&mdash;contains the DevExpress .NET MAUI [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView) component.
     * **DevExpress.Maui.Charts**&mdash;contains the DevExpress .NET MAUI [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) component.
 
-> Collection View and Charts for .NET MAUI support both iOS and Android. Your project cannot target MacCatalyst and/or Windows. To remove them, right-click the project, go to the project properties, and remove `net6.0-maccatalyst` from the list of target frameworks. In addition, please remove **MacCatalyst** and **Windows** folders from the **Platforms** folder in **Solution Explorer**.
+> Collection View and Charts for .NET MAUI support both iOS and Android. Your project cannot target MacCatalyst and/or Windows. To remove them, right-click the project and click **Edit Project File**. Remove any references to Windows and MacCatalyst. Use the [project file](./MauiStocksMini/MauiStocksMini.csproj) in this repository as an example. In addition, please remove **MacCatalyst** and **Windows** folders from the **Platforms** folder in **Solution Explorer**.
 
 ### The Main Page
 
@@ -56,6 +56,8 @@ Our main page displays a list of companies. In the *MainPage.xaml* file, you mus
     xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
     xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
     xmlns:local="clr-namespace:Stocks"
+    Title="Market"
+    BackgroundColor="{DynamicResource BackgroundColor}"
     x:Class="Stocks.MainPage">
     <dxcv:DXCollectionView/>
 </ContentPage>
@@ -128,7 +130,7 @@ namespace Stocks {
 
 Most mobile applications use a [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API to obtain data from a web service. The response can be formatted in HTML, XML, JSON, or any other format. This sample application uses static data formatted in [JSON](https://en.wikipedia.org/wiki/JSON) and stored in a file. The JSON file contains an array of companies, with an array of daily historical stock prices for each.
 
-Download the [symbols.json](./MauiStocksMini/Data/symbols.json) file, and add this file to the solution. Once added, right-click the file, go to properties, and set **Build Action** to **Embedded resource**.
+Download the [symbols.json](./MauiStocksMini/Data/symbols.json) file, and add this file to the solution. Right-click the project, click **Add** > **Existing Item**. Once added, right-click the file, go to properties, and set **Build Action** to **Embedded resource**.
 
 <img src="./Images/embedded-resource.png" alt="Embedded resource" width="700">
 
@@ -279,7 +281,7 @@ We also need to populate the grid layout with labels and images.
     HorizontalOptions="End"
     FontSize="Medium"
     TextColor="{DynamicResource PrimaryTextColor}"/>
-]<StackLayout
+<StackLayout
     Orientation="Horizontal"
     Grid.Column="1"
     Grid.Row="1"
@@ -323,15 +325,16 @@ We also need to populate the grid layout with labels and images.
 
 ##### Value Converters
 
-As you may notice, the markup uses a converter to display an up or down arrow (depending on price increase/decrease). You can find the appropriate image files in the [Images](./MauiStocksMini/Resources/Images) folder. The text color also depends on price change. To learn more about converters, review the following Microsoft help topic: [Binding Value Converters](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters).
+As you may notice, the markup uses a converter to display an up or down arrow (depending on price increase/decrease). You can find the appropriate image files in the [Images](./MauiStocksMini/Resources/Images) folder. Copy these files to the **Resources** folder in your project. The text color also depends on price change. To learn more about converters, review the following Microsoft help topic: [Binding Value Converters](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters).
 
 ```cs
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Graphics;
+using System;
 using System.Globalization;
 
-namespace DevExpress.Maui.Demo.Stocks {
+namespace Stocks {
     public class DoubleToImageSourceConverter : IValueConverter, IMarkupExtension<DoubleToImageSourceConverter> {
         public ImageSource ZeroValue { get; set; } = string.Empty;
         public ImageSource PositiveValue { get; set; } = string.Empty;
@@ -387,369 +390,10 @@ namespace DevExpress.Maui.Demo.Stocks {
 
 ##### Theme
 
-The application applies a dark theme to controls. You can find colors and styles in the [DarkTheme.xaml](./MauiStocksMini/Themes/DarkTheme.xaml) and [SharedStyles.xaml](./MauiStocksMini/Themes/SharedStyles.xaml) files within this repository.
+The application applies a dark theme to controls. You can find colors and styles in the [DarkTheme.xaml](./MauiStocksMini/Themes/DarkTheme.xaml) and [SharedStyles.xaml](./MauiStocksMini/Themes/SharedStyles.xaml) files within this repository. Create similar styles and colors in your project and add them to the resource dictionary in the [App.xaml](./MauiStocksMini/App.xaml) file.
 
 #### Run the Application
 
 You can now execute the application. Your main page should now display a list of companies.
 
 <img src="./Images/stocks-main-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-main-pixel5.png" alt="Pixel 5" height="700">
-
-### The Historical Data Page
-
-The second page displays historical data (using our [.NET MAUI Chart](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) component). Create a new page in Visual Studio and name it *HistoricalDataPage*. Do the following in the markup:
-1. Define the **dxc** XAML namespace that refers to the **DevExpress.Maui.Charts** CLR namespace.
-1. Add an instance of the [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) class to the page.
-
-```xaml
-<ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:dxc="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
-    xmlns:local="clr-namespace:Stocks"
-    x:Class="Stocks.HistoricalDataPage">
-    <dxc:ChartView/>
-</ContentPage>
-```
-
-#### Populate the Chart with Data
-
-We’ll need to create a view model for this page and populate it with data. The code below defines the **HistoricalDataViewModel** class and exposes the following properties:
-
-* **StockPrices**&mdash;daily open-close-high-low stock prices.
-* **RangeStart** and **RangeEnd**&mdash;specify the visible date range in the chart. The chart displays data for the last 60 days. Users can scroll the chart to explore all historical price data.
-
-```cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Stocks {
-    public class HistoricalDataViewModel {
-        public ItemViewModel Item { get; set; }
-        public IList<StockPrice> StockPrices { get; set; }
-        public DateTime RangeStart { get; set; }
-        public DateTime RangeEnd { get; set; }
-
-        public HistoricalDataViewModel(ItemViewModel item) {
-            Item = item;
-            Symbol symbol = Data.Symbols.Where(s => s.Ticker == this.Item.Ticker).First();
-            RangeStart = symbol.Prices.First().Date;
-            RangeEnd = RangeStart.AddDays(-60);
-            StockPrices = new List<StockPrice>();
-            foreach(StockPrice price in symbol.Prices) {
-                StockPrices.Add(price);
-            }
-        }
-    }
-}
-```
-
-#### Update the Historical Data Page Markup
-
-We can now update the historical data page so it displays data from the view model. We set the **ContentPage.BindingContext** property to a view model object in the page constructor.
-
-```cs
-using Microsoft.Maui.Controls;
-
-namespace Stocks {
-    public partial class HistoricalDataPage : ContentPage {
-        public HistoricalDataPage(HistoricalDataViewModel viewModel) {
-            InitializeComponent();
-            BindingContext = viewModel;
-            Title = viewModel.Item.Ticker;
-        }
-    }
-}
-```
-
-At the top of the page, the app displays company name and the last price. Below company name, the app displays a chart. We place these elements within a grid layout.
-
-```xaml
-<Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="115"/>
-        <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-</Grid>
-```
-
-The first grid row contains company name and the last price. We use labels and images to display this information.
-
-```xaml
-<StackLayout
-    Grid.Row="0" Grid.Column="0"
-    BackgroundColor="Transparent"
-    Orientation="Vertical"
-    HorizontalOptions="StartAndExpand"
-    VerticalOptions="CenterAndExpand"
-    Spacing="0"
-    Margin="12">
-    <Label
-        Text="{Binding Item.CompanyName}"
-        TextColor="{DynamicResource TextColor}"
-        FontSize="Subtitle"
-        Margin="0,0,12,0"/>
-    <StackLayout
-        Orientation="Horizontal"
-        Spacing="0"
-        HorizontalOptions="StartAndExpand">
-        <Label
-            Text="{Binding Item.ClosePrice, StringFormat='{0:0.00}'}"
-            TextColor="{DynamicResource TextColor}"
-            FontSize="Title"
-            Margin="0,0,12,0"
-            VerticalOptions="End"
-            VerticalTextAlignment="End"
-            LineBreakMode="TailTruncation"/>
-        <Image
-            WidthRequest="18"
-            HeightRequest="18"
-            HorizontalOptions="End"
-            Margin="0,0,3,0"
-            Source="{Binding Item.Change, 
-            Converter={local:DoubleToImageSourceConverter
-                PositiveValue='quote_arrow_up', 
-                NegativeValue='quote_arrow_down',
-                ZeroValue='not_changed'}}"
-            VerticalOptions="End">
-            <Image.WidthRequest>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="20"/>
-                    <On Platform="iOS" Value="24"/>
-                </OnPlatform>
-            </Image.WidthRequest>
-            <Image.HeightRequest>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="20"/>
-                    <On Platform="iOS" Value="24"/>
-                </OnPlatform>
-            </Image.HeightRequest>
-        </Image>
-        <Label
-            Text="{Binding Item.Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
-            TextColor="{Binding Item.Change, 
-            Converter={local:DoubleToColorConverter
-                PositiveValue='RisingValueColor', 
-                NegativeValue='FallingValueColor', 
-                ZeroValue='TextColor'}}"
-            HorizontalOptions="End"
-            VerticalOptions="End"
-            FontSize="Caption"
-            Margin="3,0"/>
-        <Label
-            Text="{Binding Item.ChangePercent, StringFormat='{0:(+0.00%);(-0.00%);(0.00%)}'}"
-            TextColor="{Binding Item.Change, 
-            Converter={local:DoubleToColorConverter
-                PositiveValue='RisingValueColor', 
-                NegativeValue='FallingValueColor', 
-                ZeroValue='TextColor'}}"
-            HorizontalOptions="End"
-            VerticalOptions="End"
-            Margin="3,0,0,0"
-            FontSize="Caption"/>
-    </StackLayout>
-    <Label
-        Text="{Binding Item.Date, StringFormat='Date: {0:d}'}"
-        TextColor="{DynamicResource SecondaryTextColor}"
-        FontSize="Caption"/>
-</StackLayout>
-```
-
-We place the chart in the second row.
-
-```xaml
-<dxc:ChartView
-    Theme="Dark"
-    Grid.Row="1"
-    AxisXNavigationMode="ScrollingAndZooming"
-    AxisMaxZoomPercent="100000">
-    <dxc:ChartView.ChartStyle>
-        <dxc:ChartStyle
-            BackgroundColor="{StaticResource BackgroundColor}">
-            <dxc:ChartStyle.Padding>
-                <dxc:Padding Left="8" Right="8"/>
-            </dxc:ChartStyle.Padding>
-        </dxc:ChartStyle>
-    </dxc:ChartView.ChartStyle>
-</dxc:ChartView>
-```
-
-##### Axes
-
-The [ChartView.AxisX](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView.AxisX) and [ChartView.AxisY](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView.AxisY) properties allow you to configure chart axes:
-
-* [DateTimeAxisX.MeasureUnit](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.DateTimeAxisX.MeasureUnit)&mdash;specifies detail level for date-time values.
-* [DateTimeAxisX.Range](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.DateTimeAxisX.Range)&mdash;specifies date range. We bind these settings to properties in the view model.
-* [NumericAxisY.AutoRangeMode](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.NumericAxisY.AutoRangeMode)&mdash;specifies whether the value range is calculated based on all or visible values.
-* [NumericAxisY.Label](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisBase.Label)&mdash;specifies label position and string format.
-* [NumericAxisY.Style](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisBase.Style)&mdash;specifies grid line visibility and colors.
-
-```xaml
-<dxc:ChartView.AxisX>
-    <dxc:DateTimeAxisX
-        x:Name="axisX"
-        EmptyRangesVisible="False"
-        MeasureUnit="Day">
-        <dxc:DateTimeAxisX.Range>
-            <dxc:DateTimeRange
-                SideMargin="3"
-                VisualMin="{Binding RangeStart}"
-                VisualMax="{Binding RangeEnd}"/>
-        </dxc:DateTimeAxisX.Range>
-    </dxc:DateTimeAxisX>
-</dxc:ChartView.AxisX>
-<dxc:ChartView.AxisY>
-    <dxc:NumericAxisY
-        AlwaysShowZeroLevel="False"
-        AutoRangeMode="VisibleValues">
-        <dxc:NumericAxisY.DisplayPosition>
-            <dxc:AxisDisplayPositionFar/>
-        </dxc:NumericAxisY.DisplayPosition>
-        <dxc:NumericAxisY.Layout>
-            <dxc:AxisLayout Anchor1="0.333" Anchor2="1.0" />
-        </dxc:NumericAxisY.Layout>
-        <dxc:NumericAxisY.Label>
-            <dxc:AxisLabel Position="Inside" TextFormat="$#.#"/>
-        </dxc:NumericAxisY.Label>
-        <dxc:NumericAxisY.Style>
-            <dxc:AxisStyle
-                LineVisible="False"
-                MajorGridlinesVisible="True"
-                MajorGridlinesColor="{StaticResource SeparatorColor}"/>
-        </dxc:NumericAxisY.Style>
-    </dxc:NumericAxisY>
-</dxc:ChartView.AxisY>
-```
-
-##### Japanese Candlestick Chart
-
-The [CandleStickSeries](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.CandleStickSeries) contains open-close-high-low stock prices. The [CandleStickSeries.Data](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.XYSeries.Data) property is set to a [SeriesDataAdapter](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.SeriesDataAdapter) object. This object interprets bound data source fields. To specify data source fields with data, we use [ValueDataMember](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ValueDataMember) objects. Review the following topic for more information: [Data Adapters](https://docs.devexpress.com/MAUI/403336/charts/data-adapters).
-
-```xaml
-<dxc:ChartView.Series>
-    <dxc:CandleStickSeries>
-        <dxc:CandleStickSeries.Data>
-            <dxc:SeriesDataAdapter
-                DataSource="{Binding StockPrices}"
-                ArgumentDataMember="Date">
-                <dxc:ValueDataMember Type="Open" Member="Open"/>
-                <dxc:ValueDataMember Type="High" Member="High"/>
-                <dxc:ValueDataMember Type="Low" Member="Low"/>
-                <dxc:ValueDataMember Type="Close" Member="Close"/>
-            </dxc:SeriesDataAdapter>
-        </dxc:CandleStickSeries.Data>
-
-    </dxc:CandleStickSeries>
-</dxc:ChartView.Series>
-```
-
-We assign a [CandleStickSeriesStyle](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.CandleStickSeriesStyle) object to the [CandleStickSeries.Style](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.CandleStickSeries.Style) property to specify candlestick-related appearance settings.
-
-```xaml
-<dxc:CandleStickSeries.Style>
-    <dxc:CandleStickSeriesStyle
-        RisingFill="{StaticResource RisingValueColor}"
-        RisingStroke="{StaticResource RisingValueColor}"
-        FallingFill="{StaticResource FallingValueColor}"
-        FallingStroke="{StaticResource FallingValueColor}"/>
-</dxc:CandleStickSeries.Style>
-```
-
-##### Bar Chart
-
-The [BarSeries](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.BarSeries) display data as bars. We use Bar charts to display daily stock volumes.
-```xaml
-<dxc:BarSeries>
-    <dxc:BarSeries.Data>
-        <dxc:SeriesDataAdapter DataSource="{Binding StockPrices}"
-                                ArgumentDataMember="Date">
-            <dxc:ValueDataMember Type="Value"
-                                Member="Volume" />
-        </dxc:SeriesDataAdapter>
-    </dxc:BarSeries.Data>
-    <dxc:BarSeries.Style>
-        <dxc:BarSeriesStyle
-            Fill="{StaticResource SymbolDetailPage_VolumeChartColor}"
-            Stroke="{StaticResource SymbolDetailPage_VolumeChartColor}"/>
-    </dxc:BarSeries.Style>
-</dxc:BarSeries>
-```
-
-We can use the [BarSeries.AxisY](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.Series.AxisY) property to specify the Y-axis. A [NumericAxisY](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.NumericAxisY) object allows you to specify the following settings:
-
-* [LabelValueNotation](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.NumericAxisY.LabelValueNotation)&mdash;this property is set to an [AxisLabelEngineeringNotation](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisLabelEngineeringNotation) object. The chart also supports [AxisLabelScientificNotation](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisLabelScientificNotation).
-* [Layout](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisBase.Layout)&mdash;this property is set to an [AxisLayout](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisLayout) object that specifies axis size and position on the chart.
-* [DisplayPosition](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisBase.DisplayPosition)&mdash;this property allows you to position the axis at the near or far edge, or specify relative or absolute position.
-* [Style](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisBase.Style)&mdash;this property is set to an [AxisStyle](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.AxisStyle) object that specifies axis and grid line visibility and colors.
-
-
-```xaml
-<dxc:BarSeries.AxisY>
-    <dxc:NumericAxisY
-        AutoRangeMode="VisibleValues">
-        <dxc:NumericAxisY.LabelValueNotation>
-            <dxc:AxisLabelEngineeringNotation/>
-        </dxc:NumericAxisY.LabelValueNotation>
-        <dxc:NumericAxisY.Layout>
-            <dxc:AxisLayout Anchor1="0" Anchor2="0.333" />
-        </dxc:NumericAxisY.Layout>
-        <dxc:NumericAxisY.DisplayPosition>
-            <dxc:AxisDisplayPositionFar/>
-        </dxc:NumericAxisY.DisplayPosition>
-        <dxc:NumericAxisY.Label>
-            <dxc:AxisLabel Position="Inside" TextFormat="$#">
-                <dxc:AxisLabel.Style>
-                    <dxc:AxisLabelStyle>
-                        <dxc:AxisLabelStyle.TextStyle>
-                            <dxc:TextStyle Color="{StaticResource TextColor}"/>
-                        </dxc:AxisLabelStyle.TextStyle>
-                    </dxc:AxisLabelStyle>
-                </dxc:AxisLabel.Style>
-            </dxc:AxisLabel>
-        </dxc:NumericAxisY.Label>
-        <dxc:NumericAxisY.Style>
-            <dxc:AxisStyle
-                LineVisible="False"
-                MajorGridlinesVisible="True"
-                MajorGridlinesColor="{StaticResource SeparatorColor}"/>
-        </dxc:NumericAxisY.Style>
-    </dxc:NumericAxisY>
-</dxc:BarSeries.AxisY>
-```
-
-### Navigation Between Two Pages
-
-When a user taps a company in the list on the main page, the application displays historical data for that company on the second page. Let's wrap the main page in a **NavigationPage** to support navigation from the main page to the second page (and back). Update the *App.xaml.cs* file as follows:
-
-```cs
-using Microsoft.Maui.Controls;
-using Application = Microsoft.Maui.Controls.Application;
-
-namespace Stocks {
-    public partial class App : Application {
-        public App() {
-            InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
-        }
-    }
-}
-```
-
-In the *MainPage.xaml* file and the code-behind, handle the [DXCollectionView.Tap](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView.Tap) event as follows:
-
-```cs
-private async void DXCollectionView_Tap(object sender, CollectionView.CollectionViewGestureEventArgs e) {
-    var symbolViewModel = (CollectionItemViewModel)e.Item;
-    var historicalDataViewModel = new HistoricalDataViewModel(symbolViewModel);
-    Navigation.PushAsync(new HistoricalDataPage(historicalDataViewModel));
-}
-```
-
-#### Run the Application
-
-Let’s execute the application once more. Users can now tap a company name on the main page and analyze the company's historical data on the second page.
-
-<img src="./Images/stocks-main-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-main-pixel5.png" alt="Pixel 5" height="700">
-
-<img src="./Images/stocks-data-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-data-pixel5.png" alt="Pixel 5" height="700">
