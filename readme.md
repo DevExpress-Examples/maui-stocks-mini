@@ -47,8 +47,6 @@ The second screen uses the [DevExpress Chart View for .NET MAUI](https://docs.de
 
 <img src="./Images/stocks-data-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-data-pixel5.png" alt="Pixel 5" height="700">
 
-The UI components used in this sample application (alongside other DevExpress .NET MAUI components) are available free of charge. To learn more about our free offer and reserve your free copy, please visit the following webpage: [Xamarin.Forms UI Controls – Free Offer from DevExpress](https://www.devexpress.com/xamarin-free/).
-
 ## How to Reproduce This Application
 
 The following step-by-step tutorial details how to reproduce this application.
