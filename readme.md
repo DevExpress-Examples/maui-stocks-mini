@@ -107,11 +107,10 @@ namespace Stocks {
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureMauiHandlers((handlers) => 
-                    handlers.AddHandler(typeof(IDXCollectionView), typeof(DXCollectionViewHandler)))
-                .ConfigureMauiHandlers((handlers) => 
-                    handlers.AddHandler(typeof(ChartView), typeof(ChartViewHandler)))
-                .ConfigureFonts(fonts => fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"));
+				.UseDevExpress()
+				.ConfigureFonts(fonts => {
+					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+				});
             return builder.Build();
         }
     }

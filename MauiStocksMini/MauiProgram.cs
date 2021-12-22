@@ -17,11 +17,10 @@ namespace DevExpress.Maui.Demo.Stocks
 			var builder = MauiApp.CreateBuilder();
 			builder
 				.UseMauiApp<App>()
+				.UseDevExpress()
 				.ConfigureFonts(fonts => {
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				})
-				.ConfigureMauiHandlers(handlers => handlers.AddHandler<ChartView, ChartViewHandler>())
-				.ConfigureMauiHandlers(handlers => handlers.AddHandler<IDXCollectionView, DXCollectionViewHandler>());
+				});
 
 			return builder.Build();
 		}
