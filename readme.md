@@ -58,7 +58,7 @@ The following step-by-step tutorial details how to reproduce this application.
     > ```
     > dotnet new maui -n Stocks 
     > ```
-1. Install the following packages from the **https://nuget.devexpress.com/free/api** NuGet package source:
+1. Install the following packages from the `https://nuget.devexpress.com/free/api` NuGet package source:
     * **DevExpress.Maui.CollectionView**&mdash;contains the DevExpress .NET MAUI [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView) component.
     * **DevExpress.Maui.Charts**&mdash;contains the DevExpress .NET MAUI [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) component.
 
@@ -89,7 +89,7 @@ Our main page displays a list of companies. In the *MainPage.xaml* file, you mus
 
 The .NET MAUI Framework requires a registered handler for all third-party controls used in an application. Review the following Microsoft help topic for more information: [Register handlers](https://docs.microsoft.com/en-us/dotnet/maui/fundamentals/app-startup#register-handlers).
 
-In the *MauiProgram.cs* file, register a handler for the [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView) type as shown below. Since we use a chart on the second page, we also register a handler for the [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) type.
+In the *MauiProgram.cs* file, call the **UseDevExpress** method to register handlers for the [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView), [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView), and other DevExpress controls.
 
 ```cs
 using DevExpress.Maui.CollectionView;
@@ -107,11 +107,10 @@ namespace Stocks {
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureMauiHandlers((handlers) => 
-                    handlers.AddHandler(typeof(IDXCollectionView), typeof(DXCollectionViewHandler)))
-                .ConfigureMauiHandlers((handlers) => 
-                    handlers.AddHandler(typeof(ChartView), typeof(ChartViewHandler)))
-                .ConfigureFonts(fonts => fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"));
+                .UseDevExpress()
+                .ConfigureFonts(fonts => {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                });
             return builder.Build();
         }
     }
