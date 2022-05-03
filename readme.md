@@ -31,10 +31,7 @@ Please register the DevExpress NuGet Gallery in Visual Studio to restore the NuG
 * [Data Editors](https://github.com/DevExpress-Examples/maui-editors-get-started)
 * [Pie Chart](https://github.com/DevExpress-Examples/maui-pie-chart-get-started)
 * [Scatter Chart](https://github.com/DevExpress-Examples/maui-scatter-chart-get-started)
-* [Tab Page](https://github.com/DevExpress-Examples/maui-tab-page-get-started)
 * [Tab View](https://github.com/DevExpress-Examples/maui-tab-view-get-started)
-* [Drawer Page](https://github.com/DevExpress-Examples/maui-drawer-page-get-started)
-* [Drawer View](https://github.com/DevExpress-Examples/maui-drawer-view-get-started)
 * [Collection View](https://github.com/DevExpress-Examples/maui-collection-view-get-started)
 
 ## What's in This Repository
