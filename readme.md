@@ -55,7 +55,7 @@ The following step-by-step tutorial details how to reproduce this application.
     > ```
     > dotnet new maui -n Stocks 
     > ```
-1. Install the following packages from the `https://nuget.devexpress.com/free/api` NuGet package source:
+1. Install the following packages from [your personal NuGet package source](https://nuget.devexpress.com/):
     * **DevExpress.Maui.CollectionView**&mdash;contains the DevExpress .NET MAUI [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView) component.
     * **DevExpress.Maui.Charts**&mdash;contains the DevExpress .NET MAUI [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) component.
 
