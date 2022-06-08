@@ -26,7 +26,7 @@
 		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Include="Resources\Images\*.svg" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -34,7 +34,7 @@
 
 	<ItemGroup>
 		<None Remove="Resources\Images\financial_chart.svg" />
-		<None Remove="Resources\Images\not_changed.svg" />
+		<None Remove="Resources\Images\not_changed.png"/>
 		<None Remove="Resources\Images\quote_arrow_down.svg" />
 		<None Remove="Resources\Images\quote_arrow_up.svg" />
 		<None Remove="Resources\symbols.json" />
@@ -47,8 +47,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.1-pre-*" />
-		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.1.1-pre-*" />
+		<PackageReference Include="DevExpress.Maui.Charts" Version="22.1.2" />
+		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.1.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 

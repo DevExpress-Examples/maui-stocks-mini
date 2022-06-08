@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
@@ -69,7 +69,7 @@
                                 Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
                                 PositiveValue='quote_arrow_up',
                                 NegativeValue='quote_arrow_down',
-                                ZeroValue='not_changed'}}"
+                                ZeroValue='not_changed.png'}}"
                                 WidthRequest="18"
                                 HeightRequest="18"
                                 VerticalOptions="Start"
