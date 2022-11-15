@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- iOS, Android, MacCatalyst -->
+		<TargetFrameworks>net7.0-ios;net7.0-android</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<RootNamespace>DevExpress.Maui.Demo.Stocks</RootNamespace>
+
+		<!-- Display name -->
+		<ApplicationTitle>MauiStocksMini</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.MauiStocksMini</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*.svg" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Images\financial_chart.svg" />
+		<None Remove="Resources\Images\not_changed.png"/>
+		<None Remove="Resources\Images\quote_arrow_down.svg" />
+		<None Remove="Resources\Images\quote_arrow_up.svg" />
+		<None Remove="Resources\symbols.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Data\symbols.json">
+			<LogicalName>symbols</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DevExpress.Maui.Charts" Version="22.2.*-pre-*" />
+		<PackageReference Include="DevExpress.Data" Version="22.2.*-pre-*" />
+		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.2.*-pre-*" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Views\MainPage.xaml.cs">
+			<DependentUpon>MainPage.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Themes\DarkTheme.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+
+	<PropertyGroup>
+		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
+		<UseInterpreter Condition="$(TargetFramework.Contains('-android'))">False</UseInterpreter>
+	</PropertyGroup>
+
+</Project>

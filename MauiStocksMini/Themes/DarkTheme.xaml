@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="DevExpress.Maui.Demo.Stocks.DarkTheme">
+    <Color x:Key="PrimaryTextColor">#DEDDE2</Color>
+    <Color x:Key="SecondaryTextColor">#A6A7A9</Color>
+    <Color x:Key="BackgroundColor">#191B22</Color>
+    <Color x:Key="FallingValueColor">#E75667</Color>
+    <Color x:Key="RisingValueColor">#1ABA9B</Color>
+    <Color x:Key="TextColor">#FFFFFF</Color>
+    <Color x:Key="SeparatorColor">#303239</Color>
+    <Color x:Key="SymbolDetailPage_VolumeChartColor">#1575A8</Color>
+    <Color x:Key="NavigationBarBackgroundColor">#262933</Color>
+    <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
+    <x:Double x:Key="MarketPage_FontSize">14</x:Double>
+</ResourceDictionary>

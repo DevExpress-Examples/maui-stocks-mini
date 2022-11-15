@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:dxc="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
+    xmlns:local="clr-namespace:DevExpress.Maui.Demo.Stocks"
+    x:Class="DevExpress.Maui.Demo.Stocks.HistoricalDataPage"
+    x:DataType="local:HistoricalDataViewModel"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout
+            Grid.Row="0" Grid.Column="0"
+            BackgroundColor="Transparent"
+            Orientation="Vertical"
+            HorizontalOptions="StartAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="0"
+            Margin="12">
+            <Label
+                Text="{Binding Item.CompanyName}"
+                TextColor="{DynamicResource TextColor}"
+                FontSize="Subtitle"
+                Margin="0,0,12,0"/>
+            <StackLayout
+                Orientation="Horizontal"
+                Spacing="0"
+                HorizontalOptions="StartAndExpand">
+                <Label
+                    Text="{Binding Item.ClosePrice, StringFormat='{0:0.00}'}"
+                    TextColor="{DynamicResource TextColor}"
+                    FontSize="Title"
+                    Margin="0,0,12,0"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="End"
+                    LineBreakMode="TailTruncation"/>
+                <Image
+                    WidthRequest="18"
+                    HeightRequest="18"
+                    HorizontalOptions="End"
+                    Margin="0,0,3,0"
+                    Source="{Binding Item.Change, 
+                    Converter={local:DoubleToImageSourceConverter
+                        PositiveValue='quote_arrow_up', 
+                        NegativeValue='quote_arrow_down',
+                        ZeroValue='not_changed.png'}}"
+                    VerticalOptions="End">
+                    <Image.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="20"/>
+                            <On Platform="iOS" Value="24"/>
+                        </OnPlatform>
+                    </Image.WidthRequest>
+                    <Image.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="20"/>
+                            <On Platform="iOS" Value="24"/>
+                        </OnPlatform>
+                    </Image.HeightRequest>
+                </Image>
+                <Label
+                    Text="{Binding Item.Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
+                    TextColor="{Binding Item.Change, 
+                    Converter={local:DoubleToColorConverter
+                        PositiveValue='RisingValueColor', 
+                        NegativeValue='FallingValueColor', 
+                        ZeroValue='TextColor'}}"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    FontSize="Caption"
+                    Margin="3,0"/>
+                <Label
+                    Text="{Binding Item.ChangePercent, StringFormat='{0:(+0.00%);(-0.00%);(0.00%)}'}"
+                    TextColor="{Binding Item.Change, 
+                    Converter={local:DoubleToColorConverter
+                        PositiveValue='RisingValueColor', 
+                        NegativeValue='FallingValueColor', 
+                        ZeroValue='TextColor'}}"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="3,0,0,0"
+                    FontSize="Caption"/>
+            </StackLayout>
+            <Label
+                Text="{Binding Item.Date, StringFormat='Date: {0:d}'}"
+                TextColor="{DynamicResource SecondaryTextColor}"
+                FontSize="Caption"/>
+        </StackLayout>
+        <dxc:ChartView
+            Grid.Row="1"
+            x:Name="ohlcChart"
+            AxisXNavigationMode="ScrollingAndZooming"
+            AxisMaxZoomPercent="100000">
+            <dxc:ChartView.AxisX>
+                <dxc:DateTimeAxisX
+                    x:Name="axisX"
+                    EmptyRangesVisible="False"
+                    MeasureUnit="Day">
+                    <dxc:DateTimeAxisX.Range>
+                        <dxc:DateTimeRange
+                            SideMargin="3"
+                            VisualMin="{Binding RangeStart}"
+                            VisualMax="{Binding RangeEnd}"/>
+                    </dxc:DateTimeAxisX.Range>
+                </dxc:DateTimeAxisX>
+            </dxc:ChartView.AxisX>
+            <dxc:ChartView.AxisY>
+                <dxc:NumericAxisY
+                    AlwaysShowZeroLevel="False"
+                    AutoRangeMode="VisibleValues">
+                    <dxc:NumericAxisY.DisplayPosition>
+                        <dxc:AxisDisplayPositionFar/>
+                    </dxc:NumericAxisY.DisplayPosition>
+                    <dxc:NumericAxisY.Layout>
+                        <dxc:AxisLayout Anchor1="0.333" Anchor2="1.0" />
+                    </dxc:NumericAxisY.Layout>
+                    <dxc:NumericAxisY.Label>
+                        <dxc:AxisLabel Position="Inside" TextFormat="$#.#"/>
+                    </dxc:NumericAxisY.Label>
+                    <dxc:NumericAxisY.Style>
+                        <dxc:AxisStyle
+                            LineVisible="False"
+                            MajorGridlinesVisible="True"
+                            MajorGridlinesColor="{StaticResource SeparatorColor}"/>
+                    </dxc:NumericAxisY.Style>
+                </dxc:NumericAxisY>
+            </dxc:ChartView.AxisY>
+            <dxc:ChartView.Series>
+                <dxc:CandleStickSeries>
+                    <dxc:CandleStickSeries.Data>
+                        <dxc:SeriesDataAdapter
+                            DataSource="{Binding StockPrices}"
+                            ArgumentDataMember="Date">
+                            <dxc:ValueDataMember Type="Open" Member="Open"/>
+                            <dxc:ValueDataMember Type="High" Member="High"/>
+                            <dxc:ValueDataMember Type="Low" Member="Low"/>
+                            <dxc:ValueDataMember Type="Close" Member="Close"/>
+                        </dxc:SeriesDataAdapter>
+                    </dxc:CandleStickSeries.Data>
+                    <dxc:CandleStickSeries.Style>
+                        <dxc:CandleStickSeriesStyle
+                            RisingFill="{StaticResource RisingValueColor}"
+                            RisingStroke="{StaticResource RisingValueColor}"
+                            FallingFill="{StaticResource FallingValueColor}"
+                            FallingStroke="{StaticResource FallingValueColor}"/>
+                    </dxc:CandleStickSeries.Style>
+                </dxc:CandleStickSeries>
+                <dxc:BarSeries>
+                    <dxc:BarSeries.Data>
+                        <dxc:SeriesDataAdapter DataSource="{Binding StockPrices}"
+                                               ArgumentDataMember="Date">
+                            <dxc:ValueDataMember Type="Value"
+                                                 Member="Volume" />
+                        </dxc:SeriesDataAdapter>
+                    </dxc:BarSeries.Data>
+                    <dxc:BarSeries.AxisY>
+                        <dxc:NumericAxisY
+                            AutoRangeMode="VisibleValues">
+                            <dxc:NumericAxisY.LabelValueNotation>
+                                <dxc:AxisLabelEngineeringNotation/>
+                            </dxc:NumericAxisY.LabelValueNotation>
+                            <dxc:NumericAxisY.Layout>
+                                <dxc:AxisLayout Anchor1="0" Anchor2="0.333" />
+                            </dxc:NumericAxisY.Layout>
+                            <dxc:NumericAxisY.DisplayPosition>
+                                <dxc:AxisDisplayPositionFar/>
+                            </dxc:NumericAxisY.DisplayPosition>
+                            <dxc:NumericAxisY.Label>
+                                <dxc:AxisLabel Position="Inside" TextFormat="$#">
+                                    <dxc:AxisLabel.Style>
+                                        <dxc:AxisLabelStyle>
+                                            <dxc:AxisLabelStyle.TextStyle>
+                                                <dxc:TextStyle Color="{StaticResource TextColor}"/>
+                                            </dxc:AxisLabelStyle.TextStyle>
+                                        </dxc:AxisLabelStyle>
+                                    </dxc:AxisLabel.Style>
+                                </dxc:AxisLabel>
+                            </dxc:NumericAxisY.Label>
+                            <dxc:NumericAxisY.Style>
+                                <dxc:AxisStyle
+                                    LineVisible="False"
+                                    MajorGridlinesVisible="True"
+                                    MajorGridlinesColor="{StaticResource SeparatorColor}"/>
+                            </dxc:NumericAxisY.Style>
+                        </dxc:NumericAxisY>
+                    </dxc:BarSeries.AxisY>
+                    <dxc:BarSeries.Style>
+                        <dxc:BarSeriesStyle
+                            Fill="{StaticResource SymbolDetailPage_VolumeChartColor}"
+                            Stroke="{StaticResource SymbolDetailPage_VolumeChartColor}"/>
+                    </dxc:BarSeries.Style>
+                </dxc:BarSeries>
+            </dxc:ChartView.Series>
+            <dxc:ChartView.ChartStyle>
+                <dxc:ChartStyle
+                    BackgroundColor="{StaticResource BackgroundColor}">
+                    <dxc:ChartStyle.Padding>
+                        <dxc:Padding Left="8" Right="8"/>
+                    </dxc:ChartStyle.Padding>
+                </dxc:ChartStyle>
+            </dxc:ChartView.ChartStyle>
+        </dxc:ChartView>
+    </Grid>
+</ContentPage>
