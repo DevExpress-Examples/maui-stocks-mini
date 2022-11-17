@@ -15,24 +15,6 @@ The **DevExpress Mobile UI for Xamarin.Forms and .NET MAUI** is free of charge. 
 
 Please register the DevExpress NuGet Gallery in Visual Studio to restore the NuGet packages used in this solution. See the following topic for more information: [Get Started with DevExpress Mobile UI for .NET MAUI](https://docs.devexpress.com/MAUI/403249/get-started).
 
-## Documentation
-
-- [Data Grid](https://docs.devexpress.com/MAUI/403255/data-grid/data-grid)
-- [Charts](https://docs.devexpress.com/MAUI/403300/charts/charts)
-- [Data Form](https://docs.devexpress.com/MAUI/403640/data-form)
-- [Navigation](https://docs.devexpress.com/MAUI/403297/navigation/index)
-- [Data Editors](https://docs.devexpress.com/MAUI/403427/editors/index)
-- [Collection View](https://docs.devexpress.com/MAUI/403324/collection-view/index)
-
-## More Examples
-
-* [Data Grid](https://github.com/DevExpress-Examples/maui-data-grid-get-started)
-* [Data Form](https://github.com/DevExpress-Examples/maui-data-form-get-started)
-* [Data Editors](https://github.com/DevExpress-Examples/maui-editors-get-started)
-* [Charts](https://github.com/DevExpress-Examples/maui-charts)
-* [Tab View](https://github.com/DevExpress-Examples/maui-tab-view-get-started)
-* [Collection View](https://github.com/DevExpress-Examples/maui-collection-view-get-started)
-
 ## What's in This Repository
 
 This repository contains a sample application designed to display historical stock information (past three months) for companies listed on NASDAQ. The app includes two screens. The main app screen uses the [DevExpress Collection View for .NET MAUI](https://docs.devexpress.com/MAUI/403324/collection-view/index) to display a list of stock symbols.
@@ -778,3 +760,22 @@ Let’s execute the application once more. Users can now tap a company name on t
 <img src="./Images/stocks-main-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-main-pixel5.png" alt="Pixel 5" height="700">
 
 <img src="./Images/stocks-data-iphone12.png" alt="iPhone 12" height="700"> <img src="./Images/stocks-data-pixel5.png" alt="Pixel 5" height="700">
+
+
+## Documentation
+
+- [Data Grid](https://docs.devexpress.com/MAUI/403255/data-grid/data-grid)
+- [Charts](https://docs.devexpress.com/MAUI/403300/charts/charts)
+- [Data Form](https://docs.devexpress.com/MAUI/403640/data-form)
+- [Navigation](https://docs.devexpress.com/MAUI/403297/navigation/index)
+- [Data Editors](https://docs.devexpress.com/MAUI/403427/editors/index)
+- [Collection View](https://docs.devexpress.com/MAUI/403324/collection-view/index)
+
+## More Examples
+
+* [Data Grid](https://github.com/DevExpress-Examples/maui-data-grid-get-started)
+* [Data Form](https://github.com/DevExpress-Examples/maui-data-form-get-started)
+* [Data Editors](https://github.com/DevExpress-Examples/maui-editors-get-started)
+* [Charts](https://github.com/DevExpress-Examples/maui-charts)
+* [Tab View](https://github.com/DevExpress-Examples/maui-tab-view-get-started)
+* [Collection View](https://github.com/DevExpress-Examples/maui-collection-view-get-started)
