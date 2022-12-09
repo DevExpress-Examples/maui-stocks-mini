@@ -48,7 +48,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="DevExpress.Maui.Charts" Version="22.2.*" />
-		<PackageReference Include="DevExpress.Data" Version="22.2.*" />
+		  
 		<PackageReference Include="DevExpress.Maui.CollectionView" Version="22.2.*" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
