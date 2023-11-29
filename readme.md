@@ -40,7 +40,7 @@ The following step-by-step tutorial details how to reproduce this application.
     * **DevExpress.Maui.CollectionView**&mdash;contains the DevExpress .NET MAUI [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView) component.
     * **DevExpress.Maui.Charts**&mdash;contains the DevExpress .NET MAUI [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView) component.
 
-> Collection View and Charts for .NET MAUI support both iOS and Android. Your project cannot target MacCatalyst and/or Windows. To remove them, right-click the project and click **Edit Project File**. Remove any references to Windows and MacCatalyst. Use the [project file](./MauiStocksMini/MauiStocksMini.csproj) in this repository as an example. In addition, please remove **MacCatalyst** and **Windows** folders from the **Platforms** folder in **Solution Explorer**.
+> Collection View and Charts for .NET MAUI support both iOS and Android. Your project cannot target MacCatalyst and/or Windows. To remove them, right-click the project and click **Edit Project File**. Remove any references to Windows and MacCatalyst. Use the [project file](CS/MauiStocksMini.csproj) in this repository as an example. In addition, please remove **MacCatalyst** and **Windows** folders from the **Platforms** folder in **Solution Explorer**.
 
 ### The Main Page
 
@@ -129,7 +129,7 @@ namespace Stocks {
 
 Most mobile applications use a [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API to obtain data from a web service. The response can be formatted in HTML, XML, JSON, or any other format. This sample application uses static data formatted in [JSON](https://en.wikipedia.org/wiki/JSON) and stored in a file. The JSON file contains an array of companies, with an array of daily historical stock prices for each.
 
-Download the [symbols.json](./MauiStocksMini/Data/symbols.json) file, and add this file to the solution. Right-click the project, click **Add** > **Existing Item**. Once added, right-click the file, go to properties, and set **Build Action** to **Embedded resource**.
+Download the [symbols.json](CS/Data/symbols.json) file, and add this file to the solution. Right-click the project, click **Add** > **Existing Item**. Once added, right-click the file, go to properties, and set **Build Action** to **Embedded resource**.
 
 <img src="./Images/embedded-resource.png" alt="Embedded resource" width="700">
 
@@ -324,7 +324,7 @@ We also need to populate the grid layout with labels and images.
 
 ##### Value Converters
 
-As you may notice, the markup uses a converter to display an up or down arrow (depending on price increase/decrease). You can find the appropriate image files in the [Images](./MauiStocksMini/Resources/Images) folder. Copy these files to the **Resources** folder in your project. The text color also depends on price change. To learn more about converters, review the following Microsoft help topic: [Binding Value Converters](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters).
+As you may notice, the markup uses a converter to display an up or down arrow (depending on price increase/decrease). You can find the appropriate image files in the [Images](CS/Resources/Images) folder. Copy these files to the **Resources** folder in your project. The text color also depends on price change. To learn more about converters, review the following Microsoft help topic: [Binding Value Converters](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/converters).
 
 ```cs
 using Microsoft.Maui.Controls;
@@ -389,7 +389,7 @@ namespace Stocks {
 
 ##### Theme
 
-The application applies a dark theme to controls. You can find colors and styles in the [DarkTheme.xaml](./MauiStocksMini/Themes/DarkTheme.xaml) and [SharedStyles.xaml](./MauiStocksMini/Themes/SharedStyles.xaml) files within this repository. Create similar styles and colors in your project and add them to the resource dictionary in the [App.xaml](./MauiStocksMini/App.xaml) file.
+The application applies a dark theme to controls. You can find colors and styles in the [DarkTheme.xaml](CS/Themes/DarkTheme.xaml) and [SharedStyles.xaml](CS/Themes/SharedStyles.xaml) files within this repository. Create similar styles and colors in your project and add them to the resource dictionary in the [App.xaml](CS/App.xaml) file.
 
 #### Run the Application
 
