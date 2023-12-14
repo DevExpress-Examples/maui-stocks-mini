@@ -38,8 +38,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="DevExpress.Maui.Charts" Version="23.2.2-beta" />
-    <PackageReference Include="DevExpress.Maui.CollectionView" Version="23.2.2-beta" />
+    <PackageReference Include="DevExpress.Maui.Charts" Version="23.2.*" />
+    <PackageReference Include="DevExpress.Maui.CollectionView" Version="23.2.*" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
