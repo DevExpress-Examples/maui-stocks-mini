@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:dxc="clr-namespace:DevExpress.Maui.Charts;assembly=DevExpress.Maui.Charts"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:local="clr-namespace:DevExpress.Maui.Demo.Stocks"
     x:Class="DevExpress.Maui.Demo.Stocks.HistoricalDataPage"
     x:DataType="local:HistoricalDataViewModel"
@@ -14,22 +15,22 @@
             <RowDefinition Height="115"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackLayout
+        <dx:DXStackLayout
             Grid.Row="0" Grid.Column="0"
             BackgroundColor="Transparent"
             Orientation="Vertical"
             HorizontalOptions="StartAndExpand"
             VerticalOptions="CenterAndExpand"
-            Spacing="0"
+            ItemSpacing="0"
             Margin="12">
             <Label
                 Text="{Binding Item.CompanyName}"
                 TextColor="{DynamicResource TextColor}"
                 FontSize="Subtitle"
                 Margin="0,0,12,0"/>
-            <StackLayout
+            <dx:DXStackLayout
                 Orientation="Horizontal"
-                Spacing="0"
+                ItemSpacing="0"
                 HorizontalOptions="StartAndExpand">
                 <Label
                     Text="{Binding Item.ClosePrice, StringFormat='{0:0.00}'}"
@@ -39,7 +40,7 @@
                     VerticalOptions="End"
                     VerticalTextAlignment="End"
                     LineBreakMode="TailTruncation"/>
-                <Image
+                <dx:DXImage
                     WidthRequest="18"
                     HeightRequest="18"
                     HorizontalOptions="End"
@@ -50,19 +51,19 @@
                         NegativeValue='quote_arrow_down',
                         ZeroValue='not_changed.png'}}"
                     VerticalOptions="End">
-                    <Image.WidthRequest>
+                    <dx:DXImage.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="20"/>
                             <On Platform="iOS" Value="24"/>
                         </OnPlatform>
-                    </Image.WidthRequest>
-                    <Image.HeightRequest>
+                    </dx:DXImage.WidthRequest>
+                    <dx:DXImage.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="20"/>
                             <On Platform="iOS" Value="24"/>
                         </OnPlatform>
-                    </Image.HeightRequest>
-                </Image>
+                    </dx:DXImage.HeightRequest>
+                </dx:DXImage>
                 <Label
                     Text="{Binding Item.Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
                     TextColor="{Binding Item.Change, 
@@ -85,12 +86,12 @@
                     VerticalOptions="End"
                     Margin="3,0,0,0"
                     FontSize="Caption"/>
-            </StackLayout>
+            </dx:DXStackLayout>
             <Label
                 Text="{Binding Item.Date, StringFormat='Date: {0:d}'}"
                 TextColor="{DynamicResource SecondaryTextColor}"
                 FontSize="Caption"/>
-        </StackLayout>
+        </dx:DXStackLayout>
         <dxc:ChartView
             Grid.Row="1"
             x:Name="ohlcChart"
