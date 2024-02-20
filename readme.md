@@ -280,14 +280,14 @@ We also need to populate the grid layout with labels and images.
     HorizontalOptions="End"
     FontSize="Medium"
     TextColor="{DynamicResource PrimaryTextColor}"/>
-<StackLayout
+<dx:DXStackLayout
     Orientation="Horizontal"
     Grid.Column="1"
     Grid.Row="1"
     VerticalOptions="Start"
     HorizontalOptions="EndAndExpand"
     Margin="0,4,12,12">
-    <Image
+    <dx:DXImage
         Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
         PositiveValue='quote_arrow_up',
         NegativeValue='quote_arrow_down',
@@ -314,8 +314,8 @@ We also need to populate the grid layout with labels and images.
         VerticalOptions="Start"
         Margin="3,0,0,0"
         FontSize="Caption"/>
-</StackLayout>
-<BoxView
+</dx:DXStackLayout>
+<dx:DXSeparator
     Grid.Row="2"
     Grid.ColumnSpan="2"
     Color="{DynamicResource SeparatorColor}"
@@ -483,22 +483,22 @@ At the top of the page, the app displays company name and the last price. Below 
 The first grid row contains company name and the last price. We use labels and images to display this information.
 
 ```xaml
-<StackLayout
+<dx:DXStackLayout
     Grid.Row="0" Grid.Column="0"
     BackgroundColor="Transparent"
     Orientation="Vertical"
     HorizontalOptions="StartAndExpand"
     VerticalOptions="CenterAndExpand"
-    Spacing="0"
+    ItemSpacing="0"
     Margin="12">
     <Label
         Text="{Binding Item.CompanyName}"
         TextColor="{DynamicResource TextColor}"
         FontSize="Subtitle"
         Margin="0,0,12,0"/>
-    <StackLayout
+    <dx:DXStackLayout
         Orientation="Horizontal"
-        Spacing="0"
+        ItemSpacing="0"
         HorizontalOptions="StartAndExpand">
         <Label
             Text="{Binding Item.ClosePrice, StringFormat='{0:0.00}'}"
@@ -508,7 +508,7 @@ The first grid row contains company name and the last price. We use labels and i
             VerticalOptions="End"
             VerticalTextAlignment="End"
             LineBreakMode="TailTruncation"/>
-        <Image
+        <dx:DXImage
             WidthRequest="18"
             HeightRequest="18"
             HorizontalOptions="End"
@@ -519,19 +519,19 @@ The first grid row contains company name and the last price. We use labels and i
                 NegativeValue='quote_arrow_down',
                 ZeroValue='not_changed'}}"
             VerticalOptions="End">
-            <Image.WidthRequest>
+            <dx:DXImage.WidthRequest>
                 <OnPlatform x:TypeArguments="x:Double">
                     <On Platform="Android" Value="20"/>
                     <On Platform="iOS" Value="24"/>
                 </OnPlatform>
-            </Image.WidthRequest>
-            <Image.HeightRequest>
+            </dx:DXImage.WidthRequest>
+            <dx:DXImage.HeightRequest>
                 <OnPlatform x:TypeArguments="x:Double">
                     <On Platform="Android" Value="20"/>
                     <On Platform="iOS" Value="24"/>
                 </OnPlatform>
-            </Image.HeightRequest>
-        </Image>
+            </dx:DXImage.HeightRequest>
+        </dx:DXImage>
         <Label
             Text="{Binding Item.Change, StringFormat='{0:+0.00;-0.00;0.00}'}"
             TextColor="{Binding Item.Change, 
@@ -554,12 +554,12 @@ The first grid row contains company name and the last price. We use labels and i
             VerticalOptions="End"
             Margin="3,0,0,0"
             FontSize="Caption"/>
-    </StackLayout>
+    </dx:DXStackLayout>
     <Label
         Text="{Binding Item.Date, StringFormat='Date: {0:d}'}"
         TextColor="{DynamicResource SecondaryTextColor}"
         FontSize="Caption"/>
-</StackLayout>
+</dx:DXStackLayout>
 ```
 
 We place the chart in the second row.

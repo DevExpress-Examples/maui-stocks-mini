@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
     xmlns:local="clr-namespace:DevExpress.Maui.Demo.Stocks"
     mc:Ignorable="d"
     x:Class="DevExpress.Maui.Demo.Stocks.MainPage"
@@ -58,14 +59,14 @@
                             HorizontalOptions="End"
                             FontSize="Medium"
                             TextColor="{DynamicResource PrimaryTextColor}"/>
-                        <StackLayout
+                        <dx:DXStackLayout
                             Orientation="Horizontal"
                             Grid.Column="1"
                             Grid.Row="1"
                             VerticalOptions="Start"
                             HorizontalOptions="EndAndExpand"
                             Margin="0,4,12,12">
-                            <Image
+                            <dx:DXImage
                                 Source="{Binding Change, Converter={local:DoubleToImageSourceConverter
                                 PositiveValue='quote_arrow_up',
                                 NegativeValue='quote_arrow_down',
@@ -92,8 +93,9 @@
                                 VerticalOptions="Start"
                                 Margin="3,0,0,0"
                                 FontSize="Caption"/>
-                        </StackLayout>
-                        <BoxView
+                        </dx:DXStackLayout>
+
+                        <dx:DXSeparator
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
                             Color="{DynamicResource SeparatorColor}"
