@@ -66,7 +66,7 @@ Our main page displays a list of companies. In the *MainPage.xaml* file, you mus
 
 #### Register Handlers for the Chart and Collection Views
 
-The .NET MAUI Framework requires a registered handler for all third-party controls used in an application. Review the following Microsoft help topic for more information: [Register handlers](https://docs.microsoft.com/en-us/dotnet/maui/fundamentals/app-startup#register-handlers).
+The .NET MAUI Framework requires a registered handler for all third-party controls used in an application. Review the following Microsoft help topic for more information: [Register handlers](https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/single-project?view=net-maui-8.0#app-entry-point).
 
 In the *MauiProgram.cs* file, call the **UseDevExpress** method to register handlers for the [DXCollectionView](https://docs.devexpress.com/MAUI/DevExpress.Maui.CollectionView.DXCollectionView), [ChartView](https://docs.devexpress.com/MAUI/DevExpress.Maui.Charts.ChartView), and other DevExpress controls.
 
