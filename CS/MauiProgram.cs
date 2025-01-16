@@ -17,7 +17,9 @@ namespace DevExpress.Maui.Demo.Stocks
 			var builder = MauiApp.CreateBuilder();
 			builder
 				.UseMauiApp<App>()
-				.UseDevExpress()
+                .UseDevExpress()
+                .UseDevExpressCharts()
+				.UseDevExpressCollectionView()
 				.ConfigureFonts(fonts => {
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				});

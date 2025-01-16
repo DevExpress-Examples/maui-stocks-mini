@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- iOS, Android, MacCatalyst -->
-    <TargetFrameworks>net8.0-ios;net8.0-android</TargetFrameworks>
+    <TargetFrameworks>net9.0-ios;net9.0-android</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
@@ -12,6 +12,7 @@
     <ApplicationId>com.companyname.MauiStocksMini</ApplicationId>
     <!-- Versions -->
     <ApplicationVersion>1</ApplicationVersion>
+    <MauiVersion>9.0.10</MauiVersion>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -38,8 +39,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="DevExpress.Maui.Charts" Version="23.2.*" />
-    <PackageReference Include="DevExpress.Maui.CollectionView" Version="23.2.*" />
+    <PackageReference Include="DevExpress.Maui.Charts" Version="24.2.*" />
+    <PackageReference Include="DevExpress.Maui.CollectionView" Version="24.2.*" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
